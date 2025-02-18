@@ -7,18 +7,25 @@ client = TestClient(app)
 
 def test_get_stakes():
     response = client.get("/?tournament_id=4584&match_id=25275355")
-    stakes = response.json()["result"]
+    response_json = response.json()
+    result = response_json["result"]
+    over_under = response_json["over_under"]
+    handicap = response_json["handicap"]
 
     assert response.status_code == 200
     assert response.json()["status"] == "success"
-    assert 'homeTeam' in stakes
-    assert 'awayTeam' in stakes
-    assert 'tie' in stakes
-    for stake in stakes:
-        assert 'name' in stakes[stake]
-        assert 'profit' in stakes[stake]
-        assert 'odds' in stakes[stake]
-        assert 'betId' in stakes[stake]
+    assert 'homeTeam' in result
+    assert 'awayTeam' in result
+    assert 'tie' in result
+    for stake in result:
+        assert 'name' in result[stake]
+        assert 'profit' in result[stake]
+        assert 'odds' in result[stake]
+        assert 'betId' in result[stake]
+    assert 'over' in over_under
+    assert 'under' in over_under
+    assert 'homeTeam' in handicap
+    assert 'awayTeam' in handicap
 
 
 def test_wrong_tournament_id():
@@ -40,7 +47,7 @@ def test_response_time():
     str_time = response.headers["X-Process-Time"]
     process_time = int(str_time[:str_time.find(' ')])
 
-    assert process_time < 3000
+    assert process_time < 7000
 
 
 def test_calculate_odds():

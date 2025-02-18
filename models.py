@@ -31,3 +31,26 @@ class get_odds(BaseModel):
     result: ResultStakes | None
     over_under: OverUnderStakes | None
     handicap: HandicapStakes | None
+
+
+class FavoriteStake(BaseModel):
+    factor_difference: float | None = 100.0
+    stake1: dict | None = None
+    stake2: dict | None = None
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None
+
+
+class User(BaseModel):
+    username: str
+
+
+class UserInDB(User):
+    hashed_password: str

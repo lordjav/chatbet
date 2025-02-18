@@ -19,7 +19,7 @@ async def get_market1_data(tournament_id: int, match_id: int) -> ResultStakes:
     if match_found == False:
         raise HTTPException(status_code=404, detail="Error: match not found")
 
-    # Save stakes in models
+    # Save stakes as models
     stake_dict = {}
     for element in stakes:
         new_stake = Stake(
@@ -43,6 +43,3 @@ async def get_market1_data(tournament_id: int, match_id: int) -> ResultStakes:
         tie=stake_dict.get('tie')
     )
     return result
-    
-    #except Exception as e:
-    #    raise HTTPException(status_code=500, detail=f"Error with server: {e}")
