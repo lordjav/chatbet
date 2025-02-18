@@ -36,10 +36,11 @@ async def get_market1_data(tournament_id: int, match_id: int) -> ResultStakes:
             case 3:
                 stake_dict["awayTeam"] = new_stake
     
-    # Group stakes by match
+    # Group stakes
     result = ResultStakes(
         homeTeam=stake_dict.get('homeTeam'),
         awayTeam=stake_dict.get('awayTeam'),
         tie=stake_dict.get('tie')
     )
+    
     return result

@@ -40,7 +40,8 @@ async def get_stakes(tournament_id: int, match_id: int, current_user: Annotated[
     
     return response
 
-    
+
+# Authentication endpoint
 @app.post("/token")
 async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]) -> Token:
     user = authenticate_user(users_db, form_data.username, form_data.password)

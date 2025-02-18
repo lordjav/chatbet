@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
-
 from fastapi import Depends, HTTPException, status
-from .models import TokenData, UserInDB
+from .models import UserInDB
 from passlib.context import CryptContext
 import jwt
 from fastapi.security import OAuth2PasswordBearer
@@ -22,28 +21,32 @@ users_db = {
     }
 }
 
-
+# Instance of CryptContext with bcrypt algorithm
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
+# Verify password function
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
 
+# Hash password function
 def get_password_hash(password):
     return pwd_context.hash(password)
 
 
+# Search user in database
 def get_user(db, username: str):
     if username in db:
         user_dict = db[username]
         return UserInDB(**user_dict)
 
 
-def authenticate_user(fake_db, username: str, password: str):
-    user = get_user(fake_db, username)
+# Authenticate user
+def authenticate_user(db, username: str, password: str):
+    user = get_user(db, username)
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
@@ -51,6 +54,7 @@ def authenticate_user(fake_db, username: str, password: str):
     return user
 
 
+# Create access token for 15 minutes
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
     if expires_delta:
@@ -62,6 +66,7 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 
+# Verify authentication token on every request
 async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
@@ -73,10 +78,10 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
         username = payload.get("sub")
         if username is None:
             raise credentials_exception
-        token_data = TokenData(username=username)
+        
     except InvalidTokenError:
         raise credentials_exception
-    user = get_user(users_db, username=token_data.username)
+    user = get_user(users_db, username)
     if user is None:
         raise credentials_exception
     return user

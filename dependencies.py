@@ -33,6 +33,7 @@ def calculate_odds(profit):
         return round((profit - 1) * 100)
     
 
+# Get favorite stakes by find the smallest factor difference beetween every pair of stakes
 def get_favorite_stake(data: any, match_id: int):
     # Get match by ID
     match_found = False
