@@ -1,4 +1,5 @@
 from datetime import timedelta
+from mangum import Mangum
 from typing import Annotated
 from fastapi import Depends, FastAPI, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -11,6 +12,7 @@ import time
 
 
 app = FastAPI()
+handler = Mangum(app)
 
 
 # Middelware: mesure response time
