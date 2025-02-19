@@ -1,0 +1,62 @@
+// Markets collection
+{
+    "_id": "ObjectId()",
+    "languageId": "int",
+    "championshipId": "int",
+    "matchId": "int",
+    "status": "string",
+    "fetchedAt": "date",
+    "markets": {
+        "result": {
+            "marketId": "int",
+            "homeTeam": {
+                "name": "string",
+                "profit": "float",
+                "odds": "int",
+                "betId": "int"
+            },
+            "awayTeam": {
+                "name": "string",
+                "profit": "float",
+                "odds": "int",
+                "betId": "int"
+            },
+            "tie": {
+                "name": "string",
+                "profit": "float",
+                "odds": "int",
+                "betId": "int"
+            }
+        },
+        "favoriteOverUnder": {
+            "marketId": "int",
+            "over": {
+                "name": "string",
+                "profit": "float",
+                "odds": "int",
+                "betId": "int"
+            },
+            "under": {
+                "name": "string",
+                "profit": "float",
+                "odds": "int",
+                "betId": "int"
+            }
+        },
+        "favoriteHandicap": {
+            "marketId": "int",
+            "homeTeam": {
+                "name": "string",
+                "profit": "float",
+                "odds": "int",
+                "betId": "int"
+            },
+            "awayTeam": {
+                "name": "string",
+                "profit": "float",
+                "odds": "int",
+                "betId": "int"
+            }
+        }
+    }
+}
