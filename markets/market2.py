@@ -1,5 +1,5 @@
-from ..dependencies import get_data, get_favorite_stake
-from ..models import HandicapStakes
+from dependencies import get_data, get_favorite_stake
+from models import HandicapStakes
 
 
 async def get_market2_data(tournament_id: int, match_id: int) -> HandicapStakes:

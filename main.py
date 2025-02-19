@@ -3,11 +3,11 @@ from mangum import Mangum
 from typing import Annotated
 from fastapi import Depends, FastAPI, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordRequestForm
-from .models import get_odds, Token, User
-from .markets.market1 import get_market1_data
-from .markets.market2 import get_market2_data
-from .markets.market3 import get_market3_data
-from .authentication import *
+from models import GetOdds, Token, User
+from markets.market1 import get_market1_data
+from markets.market2 import get_market2_data
+from markets.market3 import get_market3_data
+from authentication import *
 import time
 
 
@@ -26,14 +26,14 @@ async def add_process_time_header(request: Request, call_next):
 
 
 # Main endpoint
-@app.get("/", response_model=get_odds)
+@app.get("/", response_model=GetOdds)
 async def get_stakes(tournament_id: int, match_id: int, current_user: Annotated[User, Depends(get_current_user)]):
 
     market1_stakes = await get_market1_data(tournament_id, match_id)
     market2_stakes = await get_market2_data(tournament_id, match_id)
     market3_stakes = await get_market3_data(tournament_id, match_id)
 
-    response: get_odds = get_odds(
+    response: GetOdds = GetOdds(
         status="success", 
         result=market1_stakes,
         handicap=market2_stakes,

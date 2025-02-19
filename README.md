@@ -1,6 +1,8 @@
 # Chatbet
 
+# Public API: https://chatbet.rzvhtbd4jrja6.us-east-1.cs.amazonlightsail.com/
+
 ### User: root
 ### Password: root
 
-### See documentation in http://127.0.0.1:8000/docs
+### See documentation in https://chatbet.rzvhtbd4jrja6.us-east-1.cs.amazonlightsail.com/docs

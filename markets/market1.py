@@ -1,6 +1,6 @@
 from fastapi import HTTPException
-from ..dependencies import get_data, calculate_odds
-from ..models import Stake, ResultStakes
+from dependencies import get_data, calculate_odds
+from models import Stake, ResultStakes
 
 
 async def get_market1_data(tournament_id: int, match_id: int) -> ResultStakes:

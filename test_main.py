@@ -1,6 +1,6 @@
-from .main import app
-from .dependencies import calculate_odds
-from .authentication import create_access_token
+from main import app
+from dependencies import calculate_odds
+from authentication import create_access_token
 from fastapi.testclient import TestClient
 from datetime import timedelta
 client = TestClient(app)

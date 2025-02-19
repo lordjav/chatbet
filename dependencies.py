@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 import httpx
-from .models import Stake, FavoriteStake
+from models import Stake, FavoriteStake
 
 BASE_URL = "https://vjq8qplo2h.execute-api.us-east-1.amazonaws.com/test/getMatches"
 

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
 from fastapi import Depends, HTTPException, status
-from .models import UserInDB
+from models import UserInDB
 from passlib.context import CryptContext
 import jwt
 from fastapi.security import OAuth2PasswordBearer

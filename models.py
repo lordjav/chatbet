@@ -26,7 +26,7 @@ class HandicapStakes(BaseMarket):
     pass
 
 
-class get_odds(BaseModel):
+class GetOdds(BaseModel):
     status: str
     result: ResultStakes | None
     over_under: OverUnderStakes | None

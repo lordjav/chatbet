@@ -1,5 +1,5 @@
-from ..dependencies import get_data, get_favorite_stake
-from ..models import OverUnderStakes
+from dependencies import get_data, get_favorite_stake
+from models import OverUnderStakes
 
 
 async def get_market3_data(tournament_id: int, match_id: int) -> OverUnderStakes:
